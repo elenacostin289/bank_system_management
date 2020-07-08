@@ -8,6 +8,7 @@ class Bank
 {private:
 	char name[100], adress[100], y;
 	float balance;
+	bool ok=0;
 
 public:
 	void open_account();
@@ -30,39 +31,55 @@ void Bank::open_account()
 	cout << "Enter amount for deposite: ";
 	cin >> balance;
 	cout << "Your account is created \n";
+	ok = 1;
 }
 
 void Bank::deposite_money()
-		{
-			int a;
-			cout << "Enter how much deposite: ";
-			cin >> a;
-			balance += a;
-			cout << "Total amount you deposite: "<<balance;
-		}
-
-void Bank::display_account()
 {
-	cout << "Your full name: " << name;
-	cout << "\n";
-	cout << "Your adress: " << adress;
-	cout << "\n";
-	cout << "Type of account that you open: " << y;
-	cout << "\n";
-	cout << "Amount you deposite: " << balance;
-	cout << "\n";
-}
+	if (ok == 1)
+	{
+		int a;
+		cout << "Enter how much deposite: ";
+		cin >> a;
+		balance += a;
+		cout << "Total amount you deposite: " << balance;
+	}
+	else cout << "You don't have an account!\n";
+		}
 
 void Bank::withdraw_money()
 {
 	float amount;
-
-	cout << "Enter amount to withdraw: ";
-	cin >> amount;
-	balance -= amount;
-	cout << "Now total amount is left: " << balance;
+	if (ok == 1)
+	{
+		cout << "Enter amount to withdraw: ";
+		cin >> amount;
+		if (amount > balance) cout << "Not enough money! Try another sum.\n";
+		else {
+			balance -= amount;
+			cout << "Now total amount is left: " << balance;
+		}
+	}
+	else cout << "You don't have an account!\n";
 
 }
+
+
+void Bank::display_account()
+{
+	if (ok == 1) {
+		cout << "Your full name: " << name;
+		cout << "\n";
+		cout << "Your adress: " << adress;
+		cout << "\n";
+		cout << "Type of account that you open: " << y;
+		cout << "\n";
+		cout << "Amount you deposite: " << balance;
+		cout << "\n";
+	}
+	else cout << "You don't have an account!\n";
+}
+
 
 	
 
